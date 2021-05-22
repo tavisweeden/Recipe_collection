@@ -29,13 +29,14 @@ class UsersController < ApplicationController
 
             session[:user_id] = @user.id
         
-            redirect "/recipes" # or redirect "/failure"
+            redirect "/recipes"
 
         else
 
-            redirect "/login"
+            erb :"users/failure"
 
         end
+
 
      end
     
