@@ -10,5 +10,14 @@ class RecipesController < ApplicationController
 
     end
 
+    get "/recipes/new" do
+
+        if Helpers.is_logged_in?(session)
+            erb :'recipes/new'
+        else
+            redirect "/login"
+        end
+    end
+
 
 end

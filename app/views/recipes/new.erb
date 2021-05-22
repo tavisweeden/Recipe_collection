@@ -1,0 +1,28 @@
+<% if Helpers.is_logged_in?(session) %>
+
+  <form action='/recipes' method="post">
+    
+    Create Your Recipe:
+
+    <br>
+    <br>
+    Ingredients:
+    <% Ingredient.all.each do |ingredient| %>
+        <input type="checkbox" name="recipe[ingredient_ids][]" id="ingredient_<%= ingredient.id %>" value="<%= ingredient.id %>"><%= ingredient.name %>
+    <% end %>
+    <br>
+    <br>
+    Instructions:
+    <input type="text" name="Instructions"><br>
+    <br>
+    <br>
+    <input type="submit" value="Create Recipe!">
+
+
+  </form>
+
+  <% else %>
+  <h1> You Must Be Logged in to Make Recipes </h1>
+  <% end %>
+
+  
