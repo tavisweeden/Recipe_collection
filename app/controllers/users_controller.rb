@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     post "/signup" do
         user=User.new(name: params[:name], email: params[:email], password: params[:password])
 
-        if  @user.save && !@user.username.empty? && !@user.email.empty? 
+        if  @user.save && !@user.name.empty? && !@user.email.empty? 
             
             session[:user_id] = @user.id
 
