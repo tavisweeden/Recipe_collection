@@ -19,7 +19,20 @@ class RecipesController < ApplicationController
         end
     end
 
+    post "/recipes" do
+        if !params[:content].empty?
+            @user = User.find_by(id: session[:user_id])
+            @recipe = Recipe.new(content: params[:content])
+            @recipe.user = @user
+            @recipe.save
+
+            erb :'recipes/recipes'
+        else
+            redirect "/recipes/new"
+        end
     
+             
+    end
 
 
 end

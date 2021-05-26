@@ -3,17 +3,20 @@
   <form action='/recipes' method="POST">
     
     Create Your Recipe:
-
     <br>
     <br>
-    Ingredients:
-    <% Ingredient.all.each do |ingredient| %>
+    <label for=name>Name of Recipe:</label>
+    <input type="text" name="name">
+    <br>
+    <br>
+    <label for=ingredient>Ingredients:</label>
+        <% Ingredient.all.each do |ingredient| %>
         <input type="checkbox" name="recipe[ingredient_ids][]" id="ingredient_<%= ingredient.id %>" value="<%= ingredient.id %>"><%= ingredient.name %>
     <% end %>
     <br>
     <br>
     Instructions:
-    <input type="text" name="Instructions"><br>
+    <input type="text" name="content"><br>
     <br>
     <br>
     <input type="submit" value="Create Recipe!">
