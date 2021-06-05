@@ -31,5 +31,10 @@ class RecipesController < ApplicationController
             redirect "/recipes/new"
         end
     end
+
+    get "/recipes/:id" do
+        recipe = Recipe.find(params[:id])
+        erb :'/recipes/show'
+    end
     
 end
