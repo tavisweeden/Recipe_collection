@@ -20,9 +20,9 @@ class RecipesController < ApplicationController
     end
 
     post "/recipes" do
-        if !params["name"]["content"]["amount"].empty?
+        if !params.empty?
             @user = User.find_by(id: session[:user_id])
-            @recipe = Recipe.new(name: params[:name],content: params[:content],amount: params[:amount] )
+            @recipe = Recipe.new(name: params[:name],content: params[:content])
             @recipe.user = @user
             @recipe.save
             
@@ -33,7 +33,7 @@ class RecipesController < ApplicationController
     end
 
     get "/recipes/:id" do
-        recipe = Recipe.find(params[:id])
+        @recipe = Recipe.find(params[:id])
         erb :'/recipes/show'
     end
     
