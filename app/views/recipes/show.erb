@@ -1,9 +1,14 @@
+<h2> Name of Recipe </h2>
 <%= @recipe.name %>
 <br>
 <br>
 <h2>Ingredients</h2>
 <br>
-<%= @recipe.ingredients %> <%= @recipe.amount %>
+<ul>
+<% @recipe.ingredients.each do |ingredient| %> <%= @recipe.amount %>
+    <li><%= ingredient.name %></li>
+    <%end%>
+</ul>
 <br>
 <h2>Instructions</h2>
 <%= @recipe.content %>
