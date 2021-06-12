@@ -20,12 +20,15 @@ class RecipesController < ApplicationController
     end
 
     post "/recipes" do
+        
         if !params.empty?
             @user = User.find_by(id: session[:user_id])
-            @recipe = Recipe.new(name: params[:name],content: params[:content])
+            @recipe = Recipe.create(params[:recipe])
+            @recipe.name = params["name"]
+            @recipe.content = params["content"]
             @recipe.user = @user
             @recipe.save
-            
+  
             redirect "recipes/#{@recipe.id}"
         else
             redirect "/recipes/new"
@@ -33,8 +36,13 @@ class RecipesController < ApplicationController
     end
 
     get "/recipes/:id" do
-        @recipe = Recipe.find(params[:id])
-        erb :'/recipes/show'
+        
+        if Helpers.is_logged_in?(session)
+            @recipe = Recipe.find(params[:id])
+            erb :'/recipes/show'
+        else
+            redirect "/login"
+        end
     end
     
 end
