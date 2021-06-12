@@ -12,7 +12,7 @@
     <label for=ingredient>Ingredients:</label>
     <ul>
         <li><% Ingredient.all.each do |ingredient| %>
-        <input type="checkbox" name="recipe[ingredient_ids][]" id="ingredient_<%= ingredient.id %>" value="<%= ingredient.id %>"><%= ingredient.name %><input type=text name="recipe[amount]"></li>
+        <input type="checkbox" name="recipe[ingredient_ids][]" id="ingredient_<%= ingredient.id %>" value="<%= ingredient.id %>"><%= ingredient.name %></li>
         <% end %>
     </ul>
     <br>
