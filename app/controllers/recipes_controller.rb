@@ -44,5 +44,16 @@ class RecipesController < ApplicationController
             redirect "/login"
         end
     end
+
+    get "/recipes/:id/edit" do
+        if Helpers.is_logged_in?(session)
+
+            @recipe = Recipe.find(session[:user_id])
+   
+            erb :'/recipes/edit'
+        else
+            redirect "/login"
+        end
+    end
     
 end
