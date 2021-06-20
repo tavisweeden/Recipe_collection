@@ -48,12 +48,28 @@ class RecipesController < ApplicationController
     get "/recipes/:id/edit" do
         if Helpers.is_logged_in?(session)
 
-            @recipe = Recipe.find(session[:user_id])
+            @recipe = Recipe.find(params[:id])
    
             erb :'/recipes/edit'
         else
             redirect "/login"
         end
+    end
+
+    patch "/recipes/:id" do
+        
+
+        @recipe = Recipe.find_by(params[:id])
+
+        if !params.empty?
+            @recipe.update(params["recipe"])
+
+            redirect "/recipes/#{@recipe.id}"
+
+        else
+            redirect "/recipes/#{@recipe.id}/edit"
+        end
+
     end
     
 end
