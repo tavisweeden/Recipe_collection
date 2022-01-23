@@ -3,11 +3,14 @@ class RecipesController < ApplicationController
     get "/recipes" do
 
         if Helpers.is_logged_in?(session)
+                   @recipes = Helpers.current_user(session).recipes
+                   #binding.pry
             erb :'recipes/recipes'
+            
         else
             redirect "/login"
         end
-
+#binding.pry
     end
 
     get "/recipes/new" do
@@ -38,17 +41,19 @@ class RecipesController < ApplicationController
     get "/recipes/:id" do
         
         if Helpers.is_logged_in?(session)
-            @recipe = Recipe.find(params[:id])
+            @recipe = Recipe.find_by(id: session[:user_id])
             erb :'/recipes/show'
         else
             redirect "/login"
         end
     end
 
+    
+
     get "/recipes/:id/edit" do
         if Helpers.is_logged_in?(session)
 
-            @recipe = Recipe.find(params[:id])
+            @recipe = Recipe.find_by(id: session[:user_id])
    
             erb :'/recipes/edit'
         else

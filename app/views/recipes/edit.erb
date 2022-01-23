@@ -6,19 +6,24 @@
     <% if Helpers.is_logged_in?(session) %>
     
         <h3><label for=name>Name of Recipe:</label></h3>
-        <input type="text" name="name">
+        <input type="text" name="recipe[name]">
             <br>
             <br>
         <h3><label for=ingredient>Choose Ingredients:</label></h3>
         <ul>
             <li><% Ingredient.all.each do |ingredient| %>
-            <input type="checkbox" name="recipe[ingredient_ids][]" id="ingredient_<%= ingredient.id %>" value="<%= ingredient.id %>"><%= ingredient.name %></li>
+            <input type="checkbox" name="recipe[ingredient_ids][]" id="ingredient_<%= ingredient.id %>" value="<%= ingredient.id %>" <%= 'checked' if @recipe.ingredients.include?(ingredient) %>><%= ingredient.name %></li>
             <% end %>
+
+
+        <br>
+
+
         </ul>
             <br>
             <br>
         <h3><label for=content>Instructions:</label></h3>
-        <input type="text" name="content"><br>
+        <input type="text" name="recipe[content]"><br>
             <br>
             <br>
         <input type="submit" value="Create Recipe!">
@@ -27,6 +32,11 @@
     <% else %>
     <h1> You Must Be Logged in to Make Recipes </h1>
   <% end %>
+  <br>
+<br>
+<br>
+<a class="button" href="/recipes">Return to User Profile</a>
+
 
   
 
